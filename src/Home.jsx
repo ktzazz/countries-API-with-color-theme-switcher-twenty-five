@@ -7,13 +7,20 @@ function Home() {
   // state to handle a loading screen while data arrives
   const [loading, setLoading] = useState(true);
 
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     // function to fetch data from the API
     const fetchCountries = async () => {
       try {
         const response = await fetch(
-          "https://restcountries.com/v3.1/all?fields=name,flags,cca3,population,region,capital",
+          "https://restcountries.com/v3.1/all?fields=name,capital,flags,cca3,population,region",
         );
+
+        if (!response.ok) {
+          throw new Error("Network response failed: " + response.status);
+        }
+
         const data = await response.json();
 
         // save the array of countries in the state
@@ -21,6 +28,7 @@ function Home() {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching countries:", error);
+        setError(true);
         setLoading(false);
       }
     };
@@ -32,12 +40,15 @@ function Home() {
     return <div className="loading">Loading world data...</div>;
   }
 
+  if (error) {
+    return <div className="error">Error fetching world data</div>;
+  }
+
   return (
     <section className="home__page">
       {/* Search and Filter UI will go here later */}
       <div className="filters__placeholder">Search and Filter bars</div>
 
-      {/* Grid to display the countries */}
       <div className="countries__grid">
         {countries.map((country) => (
           <Link
