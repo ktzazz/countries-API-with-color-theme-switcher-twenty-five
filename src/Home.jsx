@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Search } from "./Icon";
 
-function Home() {
+function Home({ isDark }) {
   // state to store the list of countries from the API
   const [countries, setCountries] = useState([]);
   // state to handle a loading screen while data arrives
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
 
   useEffect(() => {
     // function to fetch data from the API
@@ -36,49 +40,92 @@ function Home() {
     fetchCountries();
   }, []); //!!!empty array means: run only once when the component mounts
 
+  const filteredCountries = countries.filter((country) => {
+    // .includes() is gonna look for the value of "searchTerm" and if country.name.common has the same value in the name then includes() will return true.
+    const matchesSearch = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // validate region. If none's selected all pass thru. If it had false then none of the countries would show.
+    const matchesRegion = selectedRegion ? country.region === selectedRegion : true;
+
+    // the country passes if both conditionals match
+    return matchesSearch && matchesRegion;
+  });
+
   if (loading) {
-    return <div className="loading">Loading world data...</div>;
+    return <div className='loading'>Loading world data...</div>;
   }
 
   if (error) {
-    return <div className="error">Error fetching world data</div>;
+    return <div className='error'>Error loading world data</div>;
   }
 
   return (
-    <section className="home__page">
-      {/* Search and Filter UI will go here later */}
-      <div className="filters__placeholder">Search and Filter bars</div>
-
-      <div className="countries__grid">
-        {countries.map((country) => (
-          <Link
-            to={`/country/${encodeURIComponent(country.name.common.toLowerCase())}`}
-            key={country.cca3}
-            className="country__card__link"
-            style={{ textDecoration: "none", color: "inherit" }}
+    <section className='home__page'>
+      <div className='filters__placeholder'>
+        <div className='search__container'>
+          <span className='search__icon'>
+            <Search isDark={isDark} />
+          </span>
+          <input
+            type='text'
+            placeholder='Search for a country...'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='search__bar'
+          />
+        </div>
+        <div className='select__container'>
+          <select
+            value={selectedRegion}
+            onChange={(e) => setSelectedRegion(e.target.value)}
+            className='region__select'
           >
-            <div key={country.cca3} className="country__card">
-              <img
-                src={country.flags.svg}
-                alt={`Flag of ${country.name.common}`}
-                style={{ width: "150px", height: "100px", objectFit: "cover" }}
-              />
-              <h3>{country.name.common}</h3>
-              {/* use toLocaleString() to format the number with comas */}
-              <p>
-                <strong>Population:</strong>{" "}
-                {country.population.toLocaleString()}
-              </p>
-              <p>
-                <strong>Region:</strong> {country.region}
-              </p>
-              <p>
-                <strong>Capital:</strong>{" "}
-                {country.capital ? country.capital[0] : "No capital"}
-              </p>
-            </div>
-          </Link>
-        ))}
+            <option value=''>Filter by Region</option>
+            <option value='Africa'>Africa</option>
+            <option value='Americas'>America</option>
+            <option value='Asia'>Asia</option>
+            <option value='Europe'>Europe</option>
+            <option value='Oceania'>Oceania</option>
+          </select>
+        </div>
+      </div>
+
+      <div className='countries__grid'>
+        {filteredCountries.length > 0 ? (
+          filteredCountries.map((country) => (
+            <Link
+              to={`/country/${encodeURIComponent(country.name.common.toLowerCase())}`}
+              key={country.cca3}
+              className='country__card__link'
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <div className='country__card'>
+                <img
+                  src={country.flags.svg}
+                  alt={`Flag of ${country.name.common}`}
+                  style={{
+                    width: "150px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
+                />
+                <h3>{country.name.common}</h3>
+                {/* use toLocaleString() to format the number with comas */}
+                <p>
+                  <strong>Population:</strong> {country.population.toLocaleString()}
+                </p>
+                <p>
+                  <strong>Region:</strong> {country.region}
+                </p>
+                <p>
+                  <strong>Capital:</strong> {country.capital ? country.capital[0] : "No capital"}
+                </p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className='no__results'>No countries match your search.</div>
+        )}
       </div>
     </section>
   );

@@ -34,13 +34,10 @@ function App() {
       <main>
         <Routes>
           {/* Route for the main page with all countries */}
-          <Route path="/" element={<Home />} />
+          <Route path='/' element={<Home isDark={isDark} />} />
 
           {/* Route for the specific country details */}
-          <Route
-            path="/country/:countryName"
-            element={<CountryDetail isDark={isDark} />}
-          />
+          <Route path='/country/:countryName' element={<CountryDetail isDark={isDark} />} />
         </Routes>
       </main>
     </Router>
