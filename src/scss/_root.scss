@@ -1,0 +1,18 @@
+@use "variables" as v;
+
+:root {
+  --font-family: #{v.$font-family};
+  --weight-bold: #{v.$weight-bold};
+  --weight-regular: #{v.$weight-regular};
+  --weight-light: #{v.$weight-light};
+
+  --font-size-detail: #{v.$Font-size-detail};
+  --font-size-home: #{v.$Font-size-home};
+
+  --blue-900: #{v.$Blue-900};
+  --blue-950: #{v.$Blue-950};
+  --grey-950: #{v.$Grey-950};
+  --grey-400: #{v.$Grey-400};
+  --grey-50: #{v.$Grey-50};
+  --white: #{v.$White};
+}
