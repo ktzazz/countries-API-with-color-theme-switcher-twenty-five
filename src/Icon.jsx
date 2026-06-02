@@ -5,9 +5,10 @@ export const Icon = ({ isDark }) => {
       data-name='Capa 1'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 25.21 27.2'
-      style={isDark ? { fill: "white", stroke: "white" } : { fill: "none", stroke: "black" }}
+      style={isDark ? { fill: "white", stroke: "white" } : { fill: "none", stroke: "#2b3945" }}
       height='15px'
       width='15px'
+      className='moon'
     >
       <defs>
         <style>
@@ -15,7 +16,6 @@ export const Icon = ({ isDark }) => {
         </style>
       </defs>
       <path
-        className='b174f250-232d-4871-8d6f-3ac7bb39e549'
         d='M26.92,22.94a13.33,13.33,0,1,1-14.14-21A13.33,13.33,0,0,0,23.29,23.45,13.15,13.15,0,0,0,26.92,22.94Z'
         transform='translate(-2.71 -1.25)'
       />
@@ -28,7 +28,8 @@ export const Arrow = ({ isDark }) => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 640 640'
-      style={isDark ? { fill: "white" } : { fill: "black" }}
+      style={isDark ? { fill: "white" } : { fill: "#808080" }}
+      className='arrow'
     >
       <path
         fill=''
@@ -41,11 +42,12 @@ export const Arrow = ({ isDark }) => {
 export const Search = ({ isDark }) => {
   return (
     <svg
-      width='15px'
-      height='15px'
+      width='35px'
+      height='35px'
       viewBox='0 0 15 15'
       xmlns='http://www.w3.org/2000/svg'
-      style={isDark ? { fill: "white" } : { fill: "black" }}
+      style={isDark ? { fill: "white" } : { fill: "#808080" }}
+      className='search'
     >
       <path
         fillRule='evenodd'

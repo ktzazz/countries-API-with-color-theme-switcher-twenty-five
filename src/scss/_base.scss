@@ -19,8 +19,8 @@
 // color scheme by user's system
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-body: var(--blue-900);
-    --bg-home-bar: var(--blue-950);
+    --bg-body: var(--blue-950);
+    --bg-home-bar: var(--blue-900);
 
     --text: var(--grey-50);
   }
@@ -28,8 +28,8 @@
 
 // when the button is clicked the body theme changes
 body.dark-mode {
-  --bg-body: var(--blue-900);
-  --bg-home-bar: var(--blue-950);
+  --bg-body: var(--blue-950);
+  --bg-home-bar: var(--blue-900);
   --text: var(--grey-50);
 }
 
@@ -44,15 +44,21 @@ body {
   background-color: var(--bg-body);
   color: var(--text);
   font-family: var(--font-family);
+  min-height: 100vh;
+  width: 100%;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
 
-  & .navbar__text {
+  & .navbar__text,
+  & .btn__home,
+  & .search__bar::placeholder,
+  & .search__bar {
     color: var(--text);
   }
 
-  & .btn__home {
-    color: var(--text);
+  & header,
+  & .search__container {
+    background-color: var(--bg-home-bar);
   }
 }

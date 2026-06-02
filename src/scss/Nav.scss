@@ -1,0 +1,35 @@
+@use "mixins" as m;
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: calc(m.rem(14) + 2vh) calc(m.rem(10) + 2vw);
+  @include m.responsive(desktop) {
+    padding: calc(m.rem(14) + 1vh) calc(m.rem(40) + 2vw);
+  }
+}
+
+h1 {
+  font-size: var(--font-size-home);
+  font-weight: var(--weight-bold);
+  @include m.responsive(tablet) {
+    font-size: min(calc(var(--font-size-home) + 1vw), m.rem(32));
+  }
+}
+
+.navbar__btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: m.rem(10);
+  cursor: pointer;
+}
+
+.moon {
+  display: block;
+  height: 85%;
+  width: 85%;
+}
