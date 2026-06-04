@@ -21,7 +21,7 @@
   :root {
     --bg-body: var(--blue-950);
     --bg-home-bar: var(--blue-900);
-
+    --option: var(--grey-400);
     --text: var(--grey-50);
   }
 }
@@ -31,12 +31,14 @@ body.dark-mode {
   --bg-body: var(--blue-950);
   --bg-home-bar: var(--blue-900);
   --text: var(--grey-50);
+  --option: var(--grey-400);
 }
 
 body.light-mode {
   --bg-body: var(--grey-50);
   --bg-home-bar: var(--white);
   --text: var(--blue-900);
+  --option: var(--grey-300);
 }
 
 // with variables
@@ -53,12 +55,27 @@ body {
   & .navbar__text,
   & .btn__home,
   & .search__bar::placeholder,
-  & .search__bar {
+  & .search__bar,
+  & .region__select,
+  & .region__select option {
     color: var(--text);
   }
 
   & header,
-  & .search__container {
+  & .search__container,
+  & .region__select,
+  & .region__select option,
+  & option:hover {
     background-color: var(--bg-home-bar);
+  }
+
+  & option:disabled {
+    background-color: var(--bg-body);
+    color: var(--option);
+    cursor: auto;
+  }
+
+  & option:hover {
+    background-color: var(--bg-body);
   }
 }

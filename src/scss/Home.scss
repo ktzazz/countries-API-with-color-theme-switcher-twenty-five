@@ -27,6 +27,7 @@
 .search__container {
   display: flex;
   padding: m.rem(15);
+  border-radius: m.rem(8);
   @include m.responsive(tablet) {
     width: 50%;
   }
@@ -52,6 +53,54 @@
 
 .search__bar:focus-visible {
   outline: none;
+}
+
+.select__container {
+  display: flex;
+  width: 50%;
+  border-radius: m.rem(8);
+  @include m.responsive(tablet) {
+    width: 25%;
+  }
+  @include m.responsive(desktop) {
+    width: min(50%, m.rem(200));
+  }
+}
+
+.region__select {
+  border: none;
+  padding: m.rem(18) m.rem(15);
+  font-size: var(--font-size-home);
+  font-family: var(--font-family);
+  width: 100%;
+  cursor: pointer;
+}
+
+.region__select:focus-visible {
+  outline: none;
+}
+
+.region__select option {
+  padding: m.rem(10) m.rem(15);
+  width: 100%;
+  font-size: var(--font-size-home);
+  font-family: var(--font-family);
+  cursor: pointer;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border: none;
+  border-radius: m.rem(8);
+  margin-block-start: m.rem(5);
+}
+
+option::checkmark {
+  display: none;
 }
 
 .countries__grid {

@@ -81,12 +81,24 @@ function Home({ isDark }) {
             onChange={(e) => setSelectedRegion(e.target.value)}
             className='region__select'
           >
-            <option value=''>Filter by Region</option>
-            <option value='Africa'>Africa</option>
-            <option value='Americas'>America</option>
-            <option value='Asia'>Asia</option>
-            <option value='Europe'>Europe</option>
-            <option value='Oceania'>Oceania</option>
+            <option value='' disabled hidden>
+              Filter by Region
+            </option>
+            <option value='Africa' disabled={selectedRegion === "Africa"}>
+              Africa
+            </option>
+            <option value='Americas' disabled={selectedRegion === "Americas"}>
+              America
+            </option>
+            <option value='Asia' disabled={selectedRegion === "Asia"}>
+              Asia
+            </option>
+            <option value='Europe' disabled={selectedRegion === "Europe"}>
+              Europe
+            </option>
+            <option value='Oceania' disabled={selectedRegion === "Oceania"}>
+              Oceania
+            </option>
           </select>
         </div>
       </div>
