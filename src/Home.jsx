@@ -113,26 +113,22 @@ function Home({ isDark }) {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className='country__card'>
-                <img
-                  src={country.flags.svg}
-                  alt={`Flag of ${country.name.common}`}
-                  style={{
-                    width: "150px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
-                <h3>{country.name.common}</h3>
-                {/* use toLocaleString() to format the number with comas */}
-                <p>
-                  <strong>Population:</strong> {country.population.toLocaleString()}
-                </p>
-                <p>
-                  <strong>Region:</strong> {country.region}
-                </p>
-                <p>
-                  <strong>Capital:</strong> {country.capital ? country.capital[0] : "No capital"}
-                </p>
+                <div className='country__img'>
+                  <img src={country.flags.svg} alt={`Flag of ${country.name.common}`} />
+                </div>
+                <div className='country__information'>
+                  <h3>{country.name.common}</h3>
+                  {/* use toLocaleString() to format the number with comas */}
+                  <p>
+                    <strong>Population:</strong> {country.population.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Region:</strong> {country.region}
+                  </p>
+                  <p>
+                    <strong>Capital:</strong> {country.capital ? country.capital[0] : "No capital"}
+                  </p>
+                </div>
               </div>
             </Link>
           ))

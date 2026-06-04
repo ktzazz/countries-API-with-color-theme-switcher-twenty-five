@@ -10,13 +10,14 @@
 .filters__placeholder {
   display: flex;
   flex-direction: column;
-  gap: m.rem(38);
-  padding: m.rem(35) calc(m.rem(20) + 2vw) 0 calc(m.rem(20) + 2vw);
+  gap: m.rem(28);
+  padding: m.rem(25) calc(m.rem(20) + 2vw) 0 calc(m.rem(20) + 2vw);
   @include m.responsive(tablet) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding-block-start: m.rem(45);
+    gap: 0;
   }
 
   @include m.responsive(desktop) {
@@ -25,6 +26,7 @@
 }
 
 .search__container {
+  border: none;
   display: flex;
   padding: m.rem(15);
   border-radius: m.rem(8);
@@ -56,6 +58,7 @@
 }
 
 .select__container {
+  border: none;
   display: flex;
   width: 50%;
   border-radius: m.rem(8);
@@ -68,16 +71,12 @@
 }
 
 .region__select {
-  border: none;
+  border: transparent;
   padding: m.rem(18) m.rem(15);
   font-size: var(--font-size-home);
   font-family: var(--font-family);
   width: 100%;
   cursor: pointer;
-}
-
-.region__select:focus-visible {
-  outline: none;
 }
 
 .region__select option {
@@ -107,19 +106,51 @@ option::checkmark {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: m.rem(40);
-  padding: m.rem(45) calc(m.rem(20) + 2vw);
-  width: min(100%, m.rem(1500));
-  justify-self: center;
-
+  padding-block-start: m.rem(45);
   @include m.responsive(tablet) {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: m.rem(40);
+    padding: m.rem(45) calc(m.rem(20) + 2vw);
   }
   @include m.responsive(desktop) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     padding-inline: 0;
   }
+}
+
+.country__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: min(100%, m.rem(300));
+  border-radius: m.rem(8);
+  overflow: hidden;
+  @include m.responsive(tablet) {
+    width: m.rem(200);
+  }
+}
+
+.country__img {
+  display: flex;
+  width: m.rem(200);
+  height: min(100%, m.rem(150));
+
+  & img {
+    width: 100%;
+    object-fit: scale-down;
+    object-position: top;
+  }
+}
+
+.country__information {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-home);
+  align-content: flex-start;
+  gap: m.rem(10);
+  padding: m.rem(10);
 }

@@ -65,7 +65,8 @@ body {
   & .search__container,
   & .region__select,
   & .region__select option,
-  & option:hover {
+  & option:hover,
+  & .country__card {
     background-color: var(--bg-home-bar);
   }
 
@@ -77,5 +78,12 @@ body {
 
   & option:hover {
     background-color: var(--bg-body);
+  }
+
+  & .region__select:focus-visible,
+  & .region__select option:focus-visible,
+  & .search__container:focus-within,
+  & .navbar__btn:focus-visible {
+    outline: var(--text) solid 1px;
   }
 }
