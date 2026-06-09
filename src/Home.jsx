@@ -120,13 +120,14 @@ function Home({ isDark }) {
                   <h3>{country.name.common}</h3>
                   {/* use toLocaleString() to format the number with comas */}
                   <p>
-                    <strong>Population:</strong> {country.population.toLocaleString()}
+                    <span> Population: </span> {country.population.toLocaleString()}
                   </p>
                   <p>
-                    <strong>Region:</strong> {country.region}
+                    <span>Region: </span>
+                    {country.region}
                   </p>
                   <p>
-                    <strong>Capital:</strong> {country.capital ? country.capital[0] : "No capital"}
+                    <span> Capital: </span> {country.capital ? country.capital[0] : "No capital"}
                   </p>
                 </div>
               </div>

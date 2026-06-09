@@ -5,6 +5,7 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: m.rem(80);
   padding: calc(m.rem(14) + 2vh) calc(m.rem(10) + 2vw);
   @include m.responsive(desktop) {
     padding: calc(m.rem(14) + 1vh) calc(m.rem(40) + 2vw);
