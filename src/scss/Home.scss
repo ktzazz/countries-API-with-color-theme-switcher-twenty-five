@@ -129,19 +129,18 @@ option::checkmark {
   height: min(100%, m.rem(300));
   border-radius: m.rem(8);
   overflow: hidden;
-  @include m.responsive(tablet) {
-    width: m.rem(200);
-  }
+  width: 100%;
 }
 
 .country__img {
   display: flex;
-  width: m.rem(200);
+  width: 100%;
   height: min(100%, m.rem(150));
 
   & img {
     width: 100%;
-    object-fit: scale-down;
+    height: 80%;
+    object-fit: cover;
     object-position: top;
   }
 }
