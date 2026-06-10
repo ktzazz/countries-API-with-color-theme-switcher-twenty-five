@@ -108,7 +108,7 @@ function CountryDetail({ isDark }) {
                     <>
                       {Object.values(country.currencies)[0].name}
                       <span className='currency__symbol'>
-                        {Object.values(country.currencies)[0].symbol}
+                        ({`${Object.values(country.currencies)[0].symbol}`})
                       </span>
                     </>
                   ) : (
