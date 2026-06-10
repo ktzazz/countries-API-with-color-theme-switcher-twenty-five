@@ -23,6 +23,7 @@
     --bg-home-bar: var(--blue-900);
     --option: var(--grey-400);
     --text: var(--grey-50);
+    --shadow: var(--shadow-dark);
   }
 }
 
@@ -32,6 +33,7 @@ body.dark-mode {
   --bg-home-bar: var(--blue-900);
   --text: var(--grey-50);
   --option: var(--grey-400);
+  --shadow: var(--shadow-dark);
 }
 
 body.light-mode {
@@ -39,6 +41,7 @@ body.light-mode {
   --bg-home-bar: var(--white);
   --text: var(--blue-900);
   --option: var(--grey-300);
+  --shadow: var(--shadow-light);
 }
 
 // with variables
@@ -52,38 +55,57 @@ body {
     background-color 0.3s ease,
     color 0.3s ease;
 
-  & .navbar__text,
-  & .btn__home,
-  & .search__bar::placeholder,
-  & .search__bar,
-  & .region__select,
-  & .region__select option {
+  .navbar__text,
+  .btn__home,
+  .search__bar::placeholder,
+  .search__bar,
+  .region__select,
+  .region__select option {
     color: var(--text);
   }
 
-  & header,
-  & .search__container,
-  & .region__select,
-  & .region__select option,
-  & option:hover,
-  & .country__card {
+  header,
+  .search__container,
+  .region__select,
+  .region__select option,
+  option:hover,
+  .country__card,
+  .btn__home {
     background-color: var(--bg-home-bar);
   }
 
-  & option:disabled {
+  option:disabled {
     background-color: var(--bg-body);
     color: var(--option);
     cursor: auto;
   }
 
-  & option:hover {
+  option:hover {
     background-color: var(--bg-body);
   }
 
-  & .region__select:focus-visible,
-  & .region__select option:focus-visible,
-  & .search__container:focus-within,
-  & .navbar__btn:focus-visible {
+  .region__select:focus-visible,
+  .region__select option:focus-visible,
+  .search__container:focus-within,
+  .navbar__btn:focus-visible,
+  .country__card__link:focus-within {
     outline: var(--text) solid 1px;
+  }
+
+  .no__results {
+    color: var(--option);
+  }
+
+  .btn__home {
+    box-shadow: 0px 0px 5px 0px var(--shadow);
+
+    &:hover {
+      box-shadow: 0px 2px 3px 0px var(--shadow);
+    }
+
+    &:active {
+      transform: translateY(4px);
+      box-shadow: 0px 0px 1px 0px var(--shadow);
+    }
   }
 }

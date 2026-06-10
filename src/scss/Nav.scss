@@ -24,15 +24,17 @@ h1 {
   background-color: transparent;
   border: none;
   display: flex;
-  align-items: center;
   gap: m.rem(10);
   overflow: visible;
   cursor: pointer;
 }
 
+.navbar__icon {
+  display: contents;
+}
+
 .moon {
-  display: block;
-  height: 85%;
-  width: 85%;
+  height: m.rem(15);
+  width: m.rem(15);
   object-fit: contain;
 }

@@ -1,3 +1,4 @@
+import "./scss/Details.scss";
 import { useParams, Link } from "react-router-dom"; //this hook reads the URL and tells what country does the user want to see
 import { useState, useEffect } from "react";
 import { Arrow } from "./Icon";
@@ -32,9 +33,7 @@ function CountryDetail({ isDark }) {
         // Look for borders within the current country data and verifies that the array isn't empty so js doesn't catch any errors
         if (currentCountry.borders && currentCountry.borders.length > 0) {
           const codes = currentCountry.borders.join(",");
-          const borderResponse = await fetch(
-            `https://restcountries.com/v3.1/alpha?codes=${codes}`,
-          );
+          const borderResponse = await fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}`);
 
           if (borderResponse.ok) {
             const borderData = await borderResponse.json();
@@ -57,89 +56,89 @@ function CountryDetail({ isDark }) {
   }, [countryName]); // Run the effect whenever countryName changes
 
   if (loading) {
-    return <div className="loading">Loading country details...</div>;
+    return <div className='loading'>Loading country details...</div>;
   }
 
   if (error) {
-    return <div className="error">Country details could not be loaded.</div>;
+    return <div className='error'>Country details could not be loaded.</div>;
   }
 
   return (
-    <section className="detail-page">
-      <Link to="/">
-        <button type="button" aria-label="Home" className="btn__home">
-          <Arrow isDark={isDark} /> Back
-        </button>
-      </Link>
-
+    <section className='detail__section'>
+      <div className='detail__btn__container'>
+        <Link to='/'>
+          <button type='button' aria-label='Home' className='btn__home'>
+            <Arrow isDark={isDark} /> <span className='btn__back'> Back </span>
+          </button>
+        </Link>
+      </div>
       {country && (
-        <div className="detail-container">
-          <img
-            src={country.flags.svg}
-            alt={country.name.common}
-            style={{ width: "20%" }}
-          />
-          <div className="detail__info">
-            <h2>{countryName}</h2>
-            <div className="info__container">
-              <h3>{country.name.common}</h3>
-              <p>
-                <h4>Native Name:</h4>{" "}
-                {Object.values(country.name.nativeName)[0].common}
-              </p>
-              <p>
-                <h4>Population:</h4> {country.population.toLocaleString()}
-              </p>
-              <p>
-                <h4>Region:</h4> {country.region}
-              </p>
-              <p>
-                <h4>Sub Region:</h4> {country.subregion}
-              </p>
-              <p>
-                <h4>Capital:</h4> {country.capital?.join(", ") || "N/A"}
-              </p>
-              <p>
-                <h4>Top Level Domain:</h4> {country.tld?.[0] || "N/A"}
-              </p>
-              <p>
-                <h4>Currencies:</h4>{" "}
-                {country.currencies ? (
-                  <>
-                    {Object.values(country.currencies)[0].name}
-                    <span className="currency__symbol">
-                      {Object.values(country.currencies)[0].symbol}
-                    </span>
-                  </>
-                ) : (
-                  "N/A"
-                )}
-              </p>
-              <p>
-                <h4>Languages:</h4>{" "}
-                {country.languages
-                  ? Object.values(country.languages).join(", ")
-                  : "N/A"}
-              </p>
+        <div className='detail__container'>
+          <img src={country.flags.svg} alt={country.name.common} className='detail__flag' />
+          <div className='detail__info'>
+            <h2>{country.name.common}</h2>
+            <div className='info__container'>
+              <div className='info__first'>
+                <p>
+                  <span className='map__name'>Native Name:</span>{" "}
+                  {Object.values(country.name.nativeName)[0].common}
+                </p>
+                <p>
+                  <span className='map__population'>Population:</span>{" "}
+                  {country.population.toLocaleString()}
+                </p>
+                <p>
+                  <span className='map__region'>Region:</span> {country.region}
+                </p>
+                <p>
+                  <span className='map__subregion'>Sub Region:</span> {country.subregion}
+                </p>
+                <p>
+                  <span className='map__capital'>Capital:</span>{" "}
+                  {country.capital?.join(", ") || "N/A"}
+                </p>
+              </div>
+              <div className='info__second'>
+                <p>
+                  <span className='map__domain'>Top Level Domain:</span> {country.tld?.[0] || "N/A"}
+                </p>
+                <p>
+                  <span className='map__currency'>Currencies:</span>{" "}
+                  {country.currencies ? (
+                    <>
+                      {Object.values(country.currencies)[0].name}
+                      <span className='currency__symbol'>
+                        {Object.values(country.currencies)[0].symbol}
+                      </span>
+                    </>
+                  ) : (
+                    "N/A"
+                  )}
+                </p>
+                <p>
+                  <span className='map__languages'>Languages:</span>{" "}
+                  {country.languages ? Object.values(country.languages).join(", ") : "N/A"}
+                </p>
+              </div>
             </div>
-            <div className="border__container">
-              <h4>Border Countries:</h4>{" "}
-              <div className="borders__btns__container">
+            <div className='border__container'>
+              <span className='border__title'>Border Countries:</span>{" "}
+              <div className='borders__btns__container'>
                 {borderNames.length > 0 ? (
                   borderNames.map((name) => (
                     <Link
                       to={`/country/${name}`}
                       key={name}
-                      className="border__link"
+                      className='border__link'
                       style={{ textDecoration: "none" }}
                     >
-                      <button type="button" className="border__btn">
+                      <button type='button' className='border__btn'>
                         {name}
                       </button>
                     </Link>
                   ))
                 ) : (
-                  <span className="no__borders">No border countries</span>
+                  <span className='no__borders'>No border countries</span>
                 )}
               </div>
             </div>
