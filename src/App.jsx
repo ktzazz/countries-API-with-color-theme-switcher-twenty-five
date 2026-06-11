@@ -40,6 +40,14 @@ function App() {
           <Route path='/country/:countryName' element={<CountryDetail isDark={isDark} />} />
         </Routes>
       </main>
+      <footer className='attribution'>
+        {" "}
+        Challenge by{" "}
+        <a href='https://www.frontendmentor.io?ref=challenge' target='_blank' rel='noreferrer'>
+          Frontend Mentor
+        </a>
+        . Coded by <a href='https://www.frontendmentor.io/profile/ktzazz'>Katia Aragón</a>.
+      </footer>
     </Router>
   );
 }

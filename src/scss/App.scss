@@ -7,3 +7,21 @@
   width: 100%;
   justify-content: center;
 }
+
+footer {
+  display: flex;
+  width: 100%;
+  margin-block: m.rem(40) m.rem(20);
+  font-size: m.rem(11);
+  font-family: var(--font-family);
+  font-weight: var(--weight-regular);
+  justify-content: center;
+  align-self: end;
+  @include m.responsive(tablet) {
+    margin-block-start: 0;
+  }
+  a {
+    text-decoration: none;
+    margin-inline: m.rem(5);
+  }
+}

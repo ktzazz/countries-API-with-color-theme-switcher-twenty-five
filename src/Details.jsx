@@ -56,7 +56,14 @@ function CountryDetail({ isDark }) {
   }, [countryName]); // Run the effect whenever countryName changes
 
   if (loading) {
-    return <div className='loading'>Loading country details...</div>;
+    return (
+      <div className='loading'>
+        Loading country details
+        <span className='pt-1'>.</span>
+        <span className='pt-2'>.</span>
+        <span className='pt-3'>.</span>
+      </div>
+    );
   }
 
   if (error) {

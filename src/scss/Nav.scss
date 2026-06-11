@@ -12,6 +12,10 @@ header {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 h1 {
   font-size: var(--font-size-home);
   font-weight: var(--weight-bold);
