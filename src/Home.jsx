@@ -2,6 +2,7 @@ import "./scss/Home.scss";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "./Icon";
+import dataBackup from "./fallback/data.json";
 
 function Home({ isDark }) {
   // state to store the list of countries from the API
@@ -32,8 +33,9 @@ function Home({ isDark }) {
         setCountries(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching countries:", error);
-        setError(true);
+        console.warn("Home: Using fallback data.", error);
+        setError(false);
+        setCountries(dataBackup);
         setLoading(false);
       }
     };
@@ -42,11 +44,14 @@ function Home({ isDark }) {
   }, []); //!!!empty array means: run only once when the component mounts
 
   const filteredCountries = countries.filter((country) => {
+    // filter the correct name, if it comes from the API we use .common, if not the string from json
+    const countryName = country?.name?.common || country?.name || "";
+
     // .includes() is gonna look for the value of "searchTerm" and if country.name.common has the same value in the name then includes() will return true.
-    const matchesSearch = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = countryName.toLowerCase().includes(searchTerm.toLowerCase());
 
     // validate region. If none's selected all pass thru. If it had false then none of the countries would show.
-    const matchesRegion = selectedRegion ? country.region === selectedRegion : true;
+    const matchesRegion = selectedRegion ? country?.region === selectedRegion : true;
 
     // the country passes if both conditionals match
     return matchesSearch && matchesRegion;
@@ -105,34 +110,43 @@ function Home({ isDark }) {
 
       <div className='countries__grid'>
         {filteredCountries.length > 0 ? (
-          filteredCountries.map((country) => (
-            <Link
-              to={`/country/${encodeURIComponent(country.name.common.toLowerCase())}`}
-              key={country.cca3}
-              className='country__card__link'
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div className='country__card'>
-                <div className='country__img'>
-                  <img src={country.flags.svg} alt={`Flag of ${country.name.common}`} />
+          filteredCountries.map((country) => {
+            // declare variables inside of .map
+            // the "?" (Optional Chaining) stops the evaluation if a property is null/undefined
+            // and returns undefined instead of crashing the whole app
+            const name = country?.name?.common || country?.name || "Unknown Country";
+            const flagImg = country?.flags?.svg || country?.flags?.png || country?.flag;
+            const capital = Array.isArray(country?.capital) // is the capital inside an array?
+              ? country?.capital.join(", ") // if so, print all of them separated by a ,
+              : country?.capital; // if not, just return the capital
+            return (
+              <Link
+                to={`/country/${encodeURIComponent(name.toLowerCase())}`}
+                key={country?.cca3 || name}
+                className='country__card__link'
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className='country__card'>
+                  <div className='country__img'>
+                    <img src={flagImg} alt={`Flag of ${name}`} />
+                  </div>
+                  <div className='country__information'>
+                    <h3>{name}</h3>
+                    <p>
+                      <span>Population: </span>{" "}
+                      {country?.population ? country.population.toLocaleString() : "N/A"}
+                    </p>
+                    <p>
+                      <span>Region: </span> {country?.region || "N/A"}
+                    </p>
+                    <p>
+                      <span>Capital: </span> {capital || "No capital"}
+                    </p>
+                  </div>
                 </div>
-                <div className='country__information'>
-                  <h3>{country.name.common}</h3>
-                  {/* use toLocaleString() to format the number with comas */}
-                  <p>
-                    <span> Population: </span> {country.population.toLocaleString()}
-                  </p>
-                  <p>
-                    <span>Region: </span>
-                    {country.region}
-                  </p>
-                  <p>
-                    <span> Capital: </span> {country.capital ? country.capital[0] : "No capital"}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))
+              </Link>
+            );
+          })
         ) : (
           <div className='no__results'>No countries match your search.</div>
         )}

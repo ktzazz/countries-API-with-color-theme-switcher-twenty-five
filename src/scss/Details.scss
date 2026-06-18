@@ -89,7 +89,7 @@
   }
   @include m.responsive(desktop-lg) {
     grid-template-columns: 1fr 1fr;
-    max-width: m.rem(1500);
+    max-width: m.rem(1300);
     justify-self: center;
   }
   span:not(.no__borders) {
@@ -103,6 +103,13 @@
     @include m.responsive(desktop) {
       margin-block: 0;
     }
+  }
+}
+
+.languages__div {
+  @include m.responsive(desktop) {
+    display: flex;
+    gap: m.rem(5);
   }
 }
 
